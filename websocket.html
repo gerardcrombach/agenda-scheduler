@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+	
+      <script type="text/javascript">
+         function WebSocketTest()
+         {
+            const WebSocket = require('ws');
+
+		const ws = new WebSocket('ws://admin:enter01@hbc.comsysco.nl/admin/:61614');
+
+		ws.on('open', function open() {
+		ws.send('ID:007, secret');
+		});
+
+		ws.on('message', function incoming(data) {
+			console.log(data);
+		});
+         }
+      </script>
+		
+   </head>
+   <body>
+   
+      <div id="sse">
+         <a href="javascript:WebSocketTest()">Run WebSocket</a>
+      </div>
+      
+   </body>
+</html>

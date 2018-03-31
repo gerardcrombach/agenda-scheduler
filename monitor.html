@@ -1,0 +1,32 @@
+<html><head>
+<meta http-equiv="refresh" content="3600; URL=touchscreen1.php">
+<title>Touchscreen 1 | Q-Manager</title>
+<link href="touchscreen.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+html,body {
+overflow:hidden;
+background-color: #FFF;
+}
+</style>
+<script src="jquery-1.10.0.js"></script>
+<script src="ams.js"></script>
+<script>
+const ws = new WebSocket('ws://217.100.205.198:61614', 'stomp');
+ 
+ws.onopen = () => {
+  ws.send('CONNECT\nclient-id:admin:enter01\n\n\0');
+ 
+  ws.send('SUBSCRIBE\ndestination:/queue/10000\n\nack:auto\nactivemq.subscriptionName:SampleSubscription\n\n\0');
+ 
+  ws.send('DISCONNECT\n\n\0');
+};
+ 
+ws.onmessage = (e) => {
+ 
+  if (e.data.startsWith('MESSAGE'))
+    console.log(e.data);
+ 
+};
+</script>
+</head>
+<body>
